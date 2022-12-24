@@ -28,7 +28,7 @@ public class AddNewContact {
   @Test
   public void testAddNewContact() throws Exception {
     addNewContact();
-    fillContacntForm("First", "Middle", "89196664242", "EmailTest@web.ru", "Last", "myAddress");
+    fillContacntForm(new ContactData("First", "Middle", "89196664242", "EmailTest@web.ru", "Last", "myAddress"));
     subminContactForm();
     wd.findElement(By.linkText("Logout")).click();
   }
@@ -37,26 +37,26 @@ public class AddNewContact {
     wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
   }
 
-  private void fillContacntForm(String firstName, String middleName, String mobileTelephone, String email, String lastName, String address) {
+  private void fillContacntForm(ContactData contactData) {
     wd.findElement(By.name("firstname")).click();
     wd.findElement(By.name("firstname")).clear();
-    wd.findElement(By.name("firstname")).sendKeys(firstName);
+    wd.findElement(By.name("firstname")).sendKeys(contactData.firstName());
     wd.findElement(By.name("middlename")).click();
     wd.findElement(By.name("middlename")).clear();
-    wd.findElement(By.name("middlename")).sendKeys(middleName);
+    wd.findElement(By.name("middlename")).sendKeys(contactData.middleName());
     wd.findElement(By.name("lastname")).click();
     wd.findElement(By.name("lastname")).clear();
-    wd.findElement(By.name("lastname")).sendKeys(lastName);
+    wd.findElement(By.name("lastname")).sendKeys(contactData.lastName());
     wd.findElement(By.name("address")).click();
     wd.findElement(By.name("address")).click();
     wd.findElement(By.name("address")).clear();
-    wd.findElement(By.name("address")).sendKeys(address);
+    wd.findElement(By.name("address")).sendKeys(contactData.address());
     wd.findElement(By.name("mobile")).click();
     wd.findElement(By.name("mobile")).clear();
-    wd.findElement(By.name("mobile")).sendKeys(mobileTelephone);
+    wd.findElement(By.name("mobile")).sendKeys(contactData.mobileTelephone());
     wd.findElement(By.name("email")).click();
     wd.findElement(By.name("email")).clear();
-    wd.findElement(By.name("email")).sendKeys(email);
+    wd.findElement(By.name("email")).sendKeys(contactData.email());
   }
 
   private void addNewContact() {
