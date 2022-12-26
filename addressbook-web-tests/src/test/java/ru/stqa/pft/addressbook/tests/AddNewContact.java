@@ -28,7 +28,7 @@ public class AddNewContact {
 
   @Test
   public void testAddNewContact() throws Exception {
-    addNewContact();
+    gotoContact();
     fillContacntForm(new ContactData("First", "Middle", "89196664242", "EmailTest@web.ru", "Last", "myAddress"));
     subminContactForm();
 
@@ -60,7 +60,7 @@ public class AddNewContact {
     wd.findElement(By.name("email")).sendKeys(contactData.email());
   }
 
-  private void addNewContact() {
+  private void gotoContact() {
     wd.findElement(By.linkText("add new")).click();
   }
 
