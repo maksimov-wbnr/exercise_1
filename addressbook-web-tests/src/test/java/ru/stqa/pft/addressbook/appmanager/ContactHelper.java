@@ -26,7 +26,7 @@ public class ContactHelper extends HelperBase {
   }
 
   public void selectContact() {
-    click(By.xpath("//*[@id='34']"));
+    click(By.name("selected[]"));
   }
   public void deleteSelectedContacts() {
     click(By.xpath("//input[@value='Delete']"));
