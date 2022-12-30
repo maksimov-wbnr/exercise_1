@@ -3,7 +3,7 @@ package ru.stqa.pft.addressbook.tests;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
-public class AddNewContact extends TestBase {
+public class ContactCreationTests extends TestBase {
 
 
   @Test
@@ -17,7 +17,8 @@ public class AddNewContact extends TestBase {
                   "MyMobileTelephone",
                   "MyEmail",
                   "test1",
-                  "MyAddress"));
+                  "MyAddress"),
+                  true);
   app.getContactHelper().submitContactForm();
 
   }

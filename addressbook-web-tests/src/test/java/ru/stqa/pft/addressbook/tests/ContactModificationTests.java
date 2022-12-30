@@ -15,8 +15,9 @@ public class ContactModificationTests extends TestBase{
                     "astMod",
                     "telMod",
                     "emailMod",
-                    "test1",
-                    "adrMod"));
+                    null,
+                    "adrMod"),
+                    false);
     app.getContactHelper().submitContactModification();
   }
 }
