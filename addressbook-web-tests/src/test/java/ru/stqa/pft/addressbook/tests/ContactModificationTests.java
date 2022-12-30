@@ -19,5 +19,6 @@ public class ContactModificationTests extends TestBase{
                     "adrMod"),
                     false);
     app.getContactHelper().submitContactModification();
+    app.getNavigationHelper().gotoHomePage();
   }
 }

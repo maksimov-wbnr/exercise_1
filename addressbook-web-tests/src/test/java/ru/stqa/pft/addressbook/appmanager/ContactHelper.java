@@ -28,6 +28,9 @@ public class ContactHelper extends HelperBase {
     }
   }
 
+  public void gotoContact() {
+    click(By.linkText("add new"));
+  }
 
   public void selectContact () {
       click(By.name("selected[]"));
