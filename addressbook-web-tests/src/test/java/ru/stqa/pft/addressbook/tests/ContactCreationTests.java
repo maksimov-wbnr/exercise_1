@@ -21,8 +21,8 @@ public class ContactCreationTests extends TestBase {
                   "MyLast",
                   "MyMobileTelephone",
                   "MyEmail",
-                  "test1",
-                  "MyAddress"),
+                  "addres"
+                  ),
                   true);
   app.getContactHelper().submitContactForm();
   app.getNavigationHelper().gotoHomePage();

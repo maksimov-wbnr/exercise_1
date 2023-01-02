@@ -19,8 +19,8 @@ public class ContactModificationTests extends TestBase{
               "MyLast",
               "MyMobileTelephone",
               "MyEmail",
-              "test1",
-              "MyAddress"));
+              "test1"
+              ));
       app.getNavigationHelper().gotoHomePage();
     }
     app.getContactHelper().initContactModification();
@@ -31,8 +31,8 @@ public class ContactModificationTests extends TestBase{
                     "astMod",
                     "telMod",
                     "emailMod",
-                    null,
-                    "adrMod"),
+                    null
+                   ),
                     false);
     app.getContactHelper().submitContactModification();
     app.getNavigationHelper().gotoHomePage();

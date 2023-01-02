@@ -22,7 +22,7 @@ public class ContactHelper extends HelperBase {
     type(By.name("mobile"), contactData.mobileTelephone());
     type(By.name("email"), contactData.email());
     if (creation){
-      new Select (wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+      new Select (wd.findElement(By.name("new_group"))).selectByIndex(1);
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }

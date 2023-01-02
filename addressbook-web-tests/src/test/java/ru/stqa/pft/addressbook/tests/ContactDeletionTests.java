@@ -20,8 +20,8 @@ public class ContactDeletionTests extends TestBase{
               "MyLast",
               "MyMobileTelephone",
               "MyEmail",
-              "test1",
-              "MyAddress"));
+              "test1"
+              ));
       app.getNavigationHelper().gotoHomePage();
     }
     app.getContactHelper().selectContact();
