@@ -10,7 +10,7 @@ public class ContactModificationTests extends TestBase{
   public void testContactModification(){
     if (! app.getContactHelper().isThereAContact()){
       app.getNavigationHelper().gotoGroupPage();
-      if (! app.getGroupHelper().isThereAGroup()){
+      if (! app.getContactHelper().isThereGroupName()){
         app.getGroupHelper().createGroup(new GroupData("test1", "test2", "test3"));
       }
       app.getContactHelper().createContact(new ContactData(
@@ -28,7 +28,7 @@ public class ContactModificationTests extends TestBase{
             new ContactData(
                     "fMod",
                     "mMod",
-                    "astMod",
+                    "lastMod",
                     "telMod",
                     "emailMod",
                     null,
