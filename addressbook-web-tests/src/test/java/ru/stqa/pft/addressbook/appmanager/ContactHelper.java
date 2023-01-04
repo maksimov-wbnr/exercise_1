@@ -64,5 +64,9 @@ public class ContactHelper extends HelperBase {
     String test1 = "test1";
     return isElementPresent(By.xpath("//span[@class='group'][text()='"+test1+"']"));
   }
+
+  public int getContactCount() {
+    return wd.findElements(By.name("selected[]")).size();
+  }
 }
 
