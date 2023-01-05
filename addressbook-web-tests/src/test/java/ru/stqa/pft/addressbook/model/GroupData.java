@@ -42,10 +42,8 @@ public final class GroupData {
 
   @Override
   public String toString() {
-    return "GroupData[" +
-            "name=" + name + ", " +
-            "header=" + header + ", " +
-            "footer=" + footer + ']';
+    return "GroupData{" +
+            "name='" + name + '\'' +
+            '}';
   }
-
 }

@@ -10,10 +10,11 @@ public class ContactCreationTests extends TestBase {
 
   @Test
   public void testAddNewContact() {
+    String GroupName = "test2";
     int before = app.getContactHelper().getContactCount();
     app.getNavigationHelper().gotoGroupPage();
-    if (! app.getContactHelper().isThereGroupName()){
-      app.getGroupHelper().createGroup(new GroupData("test1", "test2", "test3"));
+    if (! app.getContactHelper().isThereGroupName(GroupName)){
+      app.getGroupHelper().createGroup(new GroupData(GroupName, "test2", "test3"));
     }
 
   app.getContactHelper().gotoContact();
@@ -24,7 +25,7 @@ public class ContactCreationTests extends TestBase {
                   "MyLast",
                   "MyMobileTelephone",
                   "MyEmail",
-                  "test1",
+                  GroupName,
                   "MyAddress"),
                   true);
   app.getContactHelper().submitContactForm();

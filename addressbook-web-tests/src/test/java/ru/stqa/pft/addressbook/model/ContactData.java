@@ -11,6 +11,8 @@ public final class ContactData {
   private final String group;
   private final String address;
 
+
+
   public ContactData(String firstName,
                      String middleName,
                      String lastName,
@@ -54,5 +56,12 @@ public final class ContactData {
     return group;
   }
 
-
+  @Override
+  public String toString() {
+    return "ContactData{" +
+            "firstName='" + firstName + '\'' +
+            ", middleName='" + middleName + '\'' +
+            ", lastName='" + lastName + '\'' +
+            '}';
+  }
 }

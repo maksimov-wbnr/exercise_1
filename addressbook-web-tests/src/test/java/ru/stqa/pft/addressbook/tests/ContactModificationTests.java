@@ -9,10 +9,11 @@ public class ContactModificationTests extends TestBase{
 
   @Test
   public void testContactModification(){
+    String GroupName = "test2";
     if (! app.getContactHelper().isThereAContact()){
       app.getNavigationHelper().gotoGroupPage();
-      if (! app.getContactHelper().isThereGroupName()){
-        app.getGroupHelper().createGroup(new GroupData("test1", "test2", "test3"));
+      if (! app.getContactHelper().isThereGroupName(GroupName)){
+        app.getGroupHelper().createGroup(new GroupData(GroupName, "test2", "test3"));
       }
       app.getContactHelper().createContact(new ContactData(
               "MyFirst",
@@ -20,7 +21,7 @@ public class ContactModificationTests extends TestBase{
               "MyLast",
               "MyMobileTelephone",
               "MyEmail",
-              "test1",
+              GroupName,
               "MyAddress"));
       app.getNavigationHelper().gotoHomePage();
     }
