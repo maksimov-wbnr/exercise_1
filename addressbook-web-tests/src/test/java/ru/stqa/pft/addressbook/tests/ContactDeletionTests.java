@@ -9,11 +9,10 @@ public class ContactDeletionTests extends TestBase {
 
   @Test
   public void testContactDeletion() {
-    String GroupName = "test2";
     if (!app.getContactHelper().isThereAContact()) {
       app.getNavigationHelper().gotoGroupPage();
-      if (!app.getContactHelper().isThereGroupName(GroupName)) {
-        app.getGroupHelper().createGroup(new GroupData(GroupName, "test2", "test3"));
+      if (!app.getContactHelper().isThereGroupName("test1")) {
+        app.getGroupHelper().createGroup(new GroupData("test1", "test2", "test3"));
       }
     app.getContactHelper().createContact(new ContactData(
             "MyFirst",
@@ -21,7 +20,7 @@ public class ContactDeletionTests extends TestBase {
             "MyLast",
             "MyMobileTelephone",
             "MyEmail",
-            GroupName,
+            "test1",
             "MyAddress"));
     app.getNavigationHelper().gotoHomePage();
   }
