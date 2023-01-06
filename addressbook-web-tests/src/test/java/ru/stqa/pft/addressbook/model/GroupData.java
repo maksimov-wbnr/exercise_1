@@ -3,15 +3,35 @@ package ru.stqa.pft.addressbook.model;
 import java.util.Objects;
 
 public final class GroupData {
+  private  int id;
   private final String name;
   private final String header;
   private final String footer;
 
+
+
   public GroupData(String name, String header, String footer) {
+    this.id = Integer.MAX_VALUE;
     this.name = name;
     this.header = header;
     this.footer = footer;
   }
+
+  public GroupData(int id, String name, String header, String footer) {
+    this.id = id;
+    this.name = name;
+    this.header = header;
+    this.footer = footer;
+  }
+  public void setId(int id) {
+    this.id = id;
+  }
+
+  public int getId() {
+    return id;
+  }
+
+
 
   public String name() {
     return name;
@@ -26,24 +46,26 @@ public final class GroupData {
   }
 
   @Override
-  public boolean equals(Object obj) {
-    if (obj == this) return true;
-    if (obj == null || obj.getClass() != this.getClass()) return false;
-    var that = (GroupData) obj;
-    return Objects.equals(this.name, that.name) &&
-            Objects.equals(this.header, that.header) &&
-            Objects.equals(this.footer, that.footer);
+  public String toString() {
+    return "GroupData{" +
+            "id='" + id + '\'' +
+            ", name='" + name + '\'' +
+            '}';
+  }
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    GroupData groupData = (GroupData) o;
+
+    return Objects.equals(name, groupData.name);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, header, footer);
+    return name != null ? name.hashCode() : 0;
   }
 
-  @Override
-  public String toString() {
-    return "GroupData{" +
-            "name='" + name + '\'' +
-            '}';
-  }
+
 }
