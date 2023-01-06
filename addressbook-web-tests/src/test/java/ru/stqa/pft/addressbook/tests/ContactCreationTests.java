@@ -5,13 +5,16 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.GroupData;
 
+import java.util.List;
+
 public class ContactCreationTests extends TestBase {
 
 
   @Test
   public void testAddNewContact() {
     String GroupName = "test2";
-    int before = app.getContactHelper().getContactCount();
+    List<ContactData> before = app.getContactHelper().getContactList();
+
     app.getNavigationHelper().gotoGroupPage();
     if (! app.getContactHelper().isThereGroupName(GroupName)){
       app.getGroupHelper().createGroup(new GroupData(GroupName, "test2", "test3"));
@@ -30,8 +33,8 @@ public class ContactCreationTests extends TestBase {
                   true);
   app.getContactHelper().submitContactForm();
   app.getNavigationHelper().gotoHomePage();
-  int after = app.getContactHelper().getContactCount();
-  Assert.assertEquals(after,before + 1);
+  List<ContactData> after = app.getContactHelper().getContactList();
+  Assert.assertEquals(after.size(),before.size() + 1);
 
   }
 
