@@ -34,6 +34,8 @@ public final class ContactData {
     this.address = address;
   }
 
+
+
   public ContactData(
                      String firstName,
                      String middleName,
@@ -42,7 +44,7 @@ public final class ContactData {
                      String email,
                      String group,
                      String address) {
-    this.id = 0;
+    this.id = Integer.MAX_VALUE;
     this.firstName = firstName;
     this.middleName = middleName;
     this.mobileTelephone = mobileTelephone;
@@ -97,6 +99,7 @@ public final class ContactData {
             ", lastName='" + lastName + '\'' +
             '}';
   }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -104,15 +107,13 @@ public final class ContactData {
 
     ContactData that = (ContactData) o;
 
-    if (id != that.id) return false;
     if (!Objects.equals(firstName, that.firstName)) return false;
     return Objects.equals(lastName, that.lastName);
   }
 
   @Override
   public int hashCode() {
-    int result = id;
-    result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+    int result = firstName != null ? firstName.hashCode() : 0;
     result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
     return result;
   }
