@@ -27,14 +27,14 @@ public class ContactCreationTests extends TestBase {
 
     List<ContactData> before = app.contact().list();
     app.contact().addNew();
-    ContactData contact = new ContactData(
-            "First",
-            "Middle",
-            "Last",
-            "Mobile",
-            "Email",
-            GroupName,
-            "Adr");
+    ContactData contact = new ContactData()
+            .withFirstName("First")
+            .withMiddleName("Middle")
+            .withLastName("Last")
+            .withMobileTelephone("Mobile")
+            .withEmail("Email")
+            .withGroup(GroupName)
+            .withAddress("Adr");
     app.contact().fillContacntForm(contact, true);
     app.contact().submitContactForm();
     app.goTo().homePage();

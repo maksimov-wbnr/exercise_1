@@ -20,14 +20,14 @@ public class ContactModificationTests extends TestBase {
       if (!app.contact().isThereGroupName("test1")) {
         app.group().create(new GroupData().withName("test1"));
       }
-      app.contact().create(new ContactData(
-              "MyFirst",
-              "MyMiddle",
-              "MyLast",
-              "MyMobileTelephone",
-              "MyEmail",
-              "test1",
-              "MyAddress"));
+      app.contact().create(new ContactData()
+              .withFirstName("First")
+              .withMiddleName("Middle")
+              .withLastName("Last")
+              .withMobileTelephone("Mobile")
+              .withEmail("Email")
+              .withGroup("test1")
+              .withAddress("Adr"));
       app.goTo().homePage();
     }
   }
@@ -37,15 +37,14 @@ public class ContactModificationTests extends TestBase {
 
     List<ContactData> before = app.contact().list();
     int index = before.size() - 1;
-    ContactData mContact = new ContactData(
-            before.get(index).getId(),
-            "mFirst",
-            "mMiddle",
-            "mLast",
-            "mMobile",
-            "mEmail",
-            null,
-            "mAdr");
+    ContactData mContact = new ContactData()
+            .withId(before.get(index).getId())
+            .withFirstName("First")
+            .withMiddleName("Middle")
+            .withLastName("Last")
+            .withMobileTelephone("Mobile")
+            .withEmail("Email")
+            .withAddress("Adr");
     app.contact().modify(index, mContact);
     app.goTo().homePage();
     List<ContactData> after = app.contact().list();
