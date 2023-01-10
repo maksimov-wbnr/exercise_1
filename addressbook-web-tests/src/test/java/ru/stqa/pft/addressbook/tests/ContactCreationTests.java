@@ -16,17 +16,17 @@ public class ContactCreationTests extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     app.goTo().groupPage();
-    if (!app.getContactHelper().isThereGroupName(GroupName)) {
+    if (!app.contact().isThereGroupName(GroupName)) {
       app.group().create(new GroupData().withName(GroupName));
     }
-    app.goTo().gotoHomePage();
+    app.goTo().homePage();
   }
 
   @Test
   public void testAddNewContact() {
 
-    List<ContactData> before = app.getContactHelper().getContactList();
-    app.getContactHelper().gotoContact();
+    List<ContactData> before = app.contact().list();
+    app.contact().addNew();
     ContactData contact = new ContactData(
             "First",
             "Middle",
@@ -35,12 +35,11 @@ public class ContactCreationTests extends TestBase {
             "Email",
             GroupName,
             "Adr");
-    app.getContactHelper().fillContacntForm(contact, true);
-    app.getContactHelper().submitContactForm();
-    app.goTo().gotoHomePage();
-    List<ContactData> after = app.getContactHelper().getContactList();
+    app.contact().fillContacntForm(contact, true);
+    app.contact().submitContactForm();
+    app.goTo().homePage();
+    List<ContactData> after = app.contact().list();
     Assert.assertEquals(after.size(), before.size() + 1);
-
 
     before.add(contact);
     Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
