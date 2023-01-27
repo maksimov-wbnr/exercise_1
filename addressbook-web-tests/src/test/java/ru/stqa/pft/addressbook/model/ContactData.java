@@ -13,6 +13,20 @@ public  class ContactData {
   private  String group;
   private  String address;
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    ContactData that = (ContactData) o;
+
+    return id == that.id;
+  }
+
+  @Override
+  public int hashCode() {
+    return id;
+  }
 
   public ContactData withId(int id) {
     this.id = id;
@@ -94,24 +108,6 @@ public  class ContactData {
             ", firstName='" + firstName + '\'' +
             ", lastName='" + lastName + '\'' +
             '}';
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-
-    ContactData that = (ContactData) o;
-
-    if (!Objects.equals(firstName, that.firstName)) return false;
-    return Objects.equals(lastName, that.lastName);
-  }
-
-  @Override
-  public int hashCode() {
-    int result = firstName != null ? firstName.hashCode() : 0;
-    result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
-    return result;
   }
 
 }
