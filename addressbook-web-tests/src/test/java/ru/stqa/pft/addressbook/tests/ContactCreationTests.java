@@ -1,6 +1,5 @@
 package ru.stqa.pft.addressbook.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
@@ -30,7 +29,9 @@ public class ContactCreationTests extends TestBase {
             .withFirstName("First")
             .withMiddleName("Middle")
             .withLastName("Last")
-            .withMobileTelephone("Mobile")
+            .withHomePhone("919191")
+            .withMobilePhone("89111111111")
+            .withWorkPhone("900")
             .withEmail("Email")
             .withGroup(GroupName)
             .withAddress("Adr");

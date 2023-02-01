@@ -24,7 +24,9 @@ public class ContactModificationTests extends TestBase {
               .withFirstName("First")
               .withMiddleName("Middle")
               .withLastName("Last")
-              .withMobileTelephone("Mobile")
+              .withHomePhone("919191")
+              .withMobilePhone("89111111111")
+              .withWorkPhone("900")
               .withEmail("Email")
               .withGroup("test1")
               .withAddress("Adr"));
@@ -43,7 +45,7 @@ public class ContactModificationTests extends TestBase {
             .withFirstName("mFirst")
             .withMiddleName("mMiddle")
             .withLastName("mLast")
-            .withMobileTelephone("mMobile")
+            .withMobilePhone("8919111111")
             .withEmail("mEmail")
             .withAddress("mAdr");
     app.contact().modify(mContact);
