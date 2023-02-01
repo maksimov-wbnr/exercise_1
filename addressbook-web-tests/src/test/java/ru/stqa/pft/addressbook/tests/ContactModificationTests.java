@@ -27,9 +27,9 @@ public class ContactModificationTests extends TestBase {
               .withHomePhone("919191")
               .withMobilePhone("89111111111")
               .withWorkPhone("900")
-              .withEmail("Email")
+              .withEmail("tag@tag.ru")
               .withGroup("test1")
-              .withAddress("Adr"));
+              .withAddress("Address st. 52"));
       app.goTo().homePage();
     }
   }
@@ -46,8 +46,8 @@ public class ContactModificationTests extends TestBase {
             .withMiddleName("mMiddle")
             .withLastName("mLast")
             .withMobilePhone("8919111111")
-            .withEmail("mEmail")
-            .withAddress("mAdr");
+            .withEmail("mtag@tag.ru")
+            .withAddress("mAddress st. 52");
     app.contact().modify(mContact);
     app.goTo().homePage();
     assertThat(app.contact().count(),  equalTo(before.size()));

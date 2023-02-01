@@ -27,9 +27,9 @@ public class ContactPhoneTests extends TestBase {
               .withHomePhone("919191")
               .withMobilePhone("89111111111")
               .withWorkPhone("900")
-              .withEmail("Email")
+              .withEmail("tag@tag.ru")
               .withGroup("test1")
-              .withAddress("Adr"));
+              .withAddress("Address st. 52"));
       app.goTo().homePage();
     }
   }
