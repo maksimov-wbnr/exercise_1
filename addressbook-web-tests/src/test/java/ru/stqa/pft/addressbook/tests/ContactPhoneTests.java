@@ -31,8 +31,11 @@ public class ContactPhoneTests extends TestBase {
               .withMobilePhone("89111111111")
               .withWorkPhone("900")
               .withEmail("tag@tag.ru")
+              .withEmail2("2@tag.ru")
+              .withEmail3("3@tag.ru")
               .withGroup("test1")
-              .withAddress("Address st. 52"));
+              .withAddress("Address st. 52")
+              .withPhone2("909090"));
       app.goTo().homePage();
     }
   }
@@ -45,13 +48,20 @@ public class ContactPhoneTests extends TestBase {
 
     assertThat(contact.allPhones(), equalTo(mergePhones(contactInfoFromEditForm)));
     assertThat(contact.address(), equalTo(contactInfoFromEditForm.address()));
-    assertThat(contact.email(), equalTo(contactInfoFromEditForm.email()));
+    assertThat(contact.allEmails(), equalTo(mergeEmails(contactInfoFromEditForm)));
 
 
   }
 
+  private String mergeEmails(ContactData contact) {
+    return Arrays.asList(contact.email(), contact.email2(), contact.email3())
+            .stream().filter((s) -> s != null && ! s.equals(""))
+            .collect(Collectors.joining("\n"));
+
+  }
+
   private String mergePhones(ContactData contact) {
-     return Arrays.asList(contact.homePhone(), contact.mobilePhone(), contact.workPhone())
+     return Arrays.asList(contact.homePhone(), contact.mobilePhone(), contact.workPhone(), contact.phone2())
             .stream().filter((s) -> !s.equals(""))
              .map(ContactPhoneTests::cleaned)
              .collect(Collectors.joining("\n"));

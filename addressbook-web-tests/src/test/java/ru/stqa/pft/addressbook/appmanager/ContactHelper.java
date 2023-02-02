@@ -132,7 +132,7 @@ public class ContactHelper extends HelperBase {
     wd.navigate().back();
     return new ContactData().withId(contact.getId())
             .withFirstName(firstname).withLastName(lastname).withAddress(address).withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work)
-            .withEmail(email).withPhone2(phone2);
+            .withEmail(email).withEmail2(email2).withEmail3(email3).withPhone2(phone2);
   }
 }
 
