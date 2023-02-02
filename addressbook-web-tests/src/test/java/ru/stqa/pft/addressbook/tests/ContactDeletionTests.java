@@ -28,8 +28,11 @@ public class ContactDeletionTests extends TestBase {
               .withMobilePhone("89111111111")
               .withWorkPhone("900")
               .withEmail("tag@tag.ru")
+              .withEmail2("2tag@tag.ru")
+              .withEmail3("3tag@tag.ru")
               .withGroup("test1")
-              .withAddress("Adr"));
+              .withAddress("Adr")
+              .withPhone2("909090"));
       app.goTo().homePage();
     }
   }

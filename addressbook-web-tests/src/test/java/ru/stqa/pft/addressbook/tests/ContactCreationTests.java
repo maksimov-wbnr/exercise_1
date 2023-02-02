@@ -32,9 +32,12 @@ public class ContactCreationTests extends TestBase {
             .withHomePhone("919191")
             .withMobilePhone("89111111111")
             .withWorkPhone("900")
-            .withEmail("tag@tag.ru")
+            .withEmail("1@tag.ru")
+            .withEmail2("2@tag.ru")
+            .withEmail3("3@tag.ru")
             .withGroup(GroupName)
-            .withAddress("Address st. 52");
+            .withAddress("Address st. 52")
+            .withPhone2("909090");
     app.contact().fillContacntForm(contact, true);
     app.contact().submitContactForm();
     app.goTo().homePage();
