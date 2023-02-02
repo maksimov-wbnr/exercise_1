@@ -38,7 +38,7 @@ public class ContactCreationTests extends TestBase {
             .withGroup(GroupName)
             .withAddress("Address st. 52")
             .withPhone2("909090");
-    app.contact().fillContacntForm(contact, true);
+    app.contact().fillContactForm(contact, true);
     app.contact().submitContactForm();
     app.goTo().homePage();
     assertThat(app.contact().count(),  equalTo(before.size() + 1));
