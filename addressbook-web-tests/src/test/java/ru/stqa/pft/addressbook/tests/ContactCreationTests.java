@@ -20,11 +20,11 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactCreationTests extends TestBase {
-  String GroupName = "test2";
+
 
   @DataProvider
   public Iterator<Object[]> validContacts() throws IOException {
-    try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.xml")))){
+    try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.xml")))) {
       String xml = "";
       String line = reader.readLine();
       while (line != null) {
@@ -35,36 +35,39 @@ public class ContactCreationTests extends TestBase {
       xstream.processAnnotations(ContactData.class);
       xstream.allowTypes(new Class[]{ContactData.class});
       List<ContactData> contacts = (List<ContactData>) xstream.fromXML(xml);
-      return contacts.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
+      return contacts.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
     }
   }
 
 
   @BeforeMethod
   public void ensurePreconditions() {
-    app.goTo().groupPage();
-    if (!app.contact().isThereGroupName(GroupName)) {
-      app.group().create(new GroupData().withName(GroupName));
+    if (app.db().groups().size() == 0) {
+       app.goTo().groupPage();
+       app.group().create(new GroupData().withName("test1"));
+      }
     }
-    app.goTo().homePage();
+
+
+
+    @Test(dataProvider = "validContacts")
+    public void testAddNewContact (ContactData contact){
+
+      Contacts before = app.db().contacts();
+      contact.withGroup(app.db().groups().stream().findFirst().get().name());
+      app.contact().addNew();
+      app.contact().fillContactForm(contact, true);
+      app.contact().submitContactForm();
+      app.goTo().homePage();
+      Contacts after = app.db().contacts();
+      assertThat(after.size(), equalTo(before.size() + 1));
+
+
+      assertThat(after, equalTo
+              (before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
+
+    }
+
   }
 
-  @Test(dataProvider = "validContacts")
-  public void testAddNewContact(ContactData contact) {
-    contact.withGroup(GroupName);
-    Contacts before = app.contact().all();
-    app.contact().addNew();
-    app.contact().fillContactForm(contact, true);
-    app.contact().submitContactForm();
-    app.goTo().homePage();
-    assertThat(app.contact().count(),  equalTo(before.size() + 1));
-    Contacts after = app.contact().all();
-
-
-    assertThat(after, equalTo
-            (before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
-
-  }
-
-}
 

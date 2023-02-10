@@ -30,7 +30,7 @@ public class ContactHelper extends HelperBase {
     type(By.name("email2"), contactData.email2());
     type(By.name("email3"), contactData.email3());
     type(By.name("phone2"), contactData.phone2());
-    attach(By.name("photo"), contactData.photo());
+    attach(By.name("photo"), contactData.photo());  //если не закоментить то будет ошибка NullPointerException
     if (creation) {
       new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.group());
     } else {
@@ -70,9 +70,11 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("//input[22]"));
   }
 
-  public void create(ContactData contact) {
+  public void create(ContactData contactData) {
     addNew();
-    fillContactForm(contact, true);
+    type(By.name("firstname"), contactData.firstName());
+    type(By.name("lastname"), contactData.lastName());
+    type(By.name("middlename"), contactData.middleName());
     submitContactForm();
   }
 

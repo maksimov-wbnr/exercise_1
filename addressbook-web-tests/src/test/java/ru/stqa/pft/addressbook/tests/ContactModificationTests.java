@@ -15,24 +15,17 @@ public class ContactModificationTests extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
 
-    if (!app.contact().isThereAContact()) {
-      app.goTo().groupPage();
-      if (!app.contact().isThereGroupName("test1")) {
-        app.group().create(new GroupData().withName("test1"));
-      }
+    if (app.db().contacts().size() == 0 ){
       app.contact().create(new ContactData()
               .withFirstName("First")
-              .withMiddleName("Middle")
               .withLastName("Last")
-              .withHomePhone("919191")
-              .withMobilePhone("89111111111")
-              .withWorkPhone("900")
-              .withEmail("tag@tag.ru")
-              .withEmail2("2tag@tag.ru")
-              .withEmail3("3tag@tag.ru")
-              .withGroup("test1")
-              .withAddress("Address st. 52")
-              .withPhone2("909090"));
+              .withMiddleName("Middle")
+              .withHomePhone("515151")
+              .withMobilePhone("89191111111")
+              .withWorkPhone("252525")
+              .withEmail("test@tag.com")
+              .withAddress("New address"));
+
       app.goTo().homePage();
     }
   }
@@ -40,21 +33,23 @@ public class ContactModificationTests extends TestBase {
   @Test
   public void testContactModification() {
 
-    Contacts before = app.contact().all();
+    Contacts before = app.db().contacts();
     ContactData modifiedContact = before.iterator().next();
-
     ContactData mContact = new ContactData()
             .withId(modifiedContact.getId())
             .withFirstName("mFirst")
-            .withMiddleName("mMiddle")
             .withLastName("mLast")
-            .withMobilePhone("8919111111")
-            .withEmail("mtag@tag.ru")
-            .withAddress("mAddress st. 52");
+            .withMiddleName("mMiddle")
+            .withHomePhone("414141")
+            .withMobilePhone("81111111111")
+            .withWorkPhone("202020")
+            .withEmail("mtest@tag.com")
+            .withAddress("mNew address");
     app.contact().modify(mContact);
     app.goTo().homePage();
-    assertThat(app.contact().count(),  equalTo(before.size()));
-    Contacts after = app.contact().all();
+    Contacts after = app.db().contacts();
+    assertThat(after.size(),  equalTo(before.size()));
+
 
     assertThat(after, equalTo(before.without(modifiedContact).withAdded(mContact)));
   }
