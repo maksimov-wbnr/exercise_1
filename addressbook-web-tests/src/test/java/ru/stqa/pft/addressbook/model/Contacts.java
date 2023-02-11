@@ -19,7 +19,7 @@ public class Contacts extends ForwardingSet<ContactData> {
   }
 
   public Contacts() {
-    this.delegate = new HashSet<>();
+    this.delegate = new HashSet<ContactData>();
   }
 
   @Override

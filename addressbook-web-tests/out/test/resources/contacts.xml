@@ -2,21 +2,11 @@
   <contact>
     <firstName>First 0</firstName>
     <lastName>Last 0</lastName>
-    <middleName>Middle 0</middleName>
-    <homePhone>50505</homePhone>
-    <mobilePhone>89111111111</mobilePhone>
-    <workPhone>898989</workPhone>
-    <email>0testgen@tag.com</email>
     <address>address 0</address>
   </contact>
   <contact>
     <firstName>First 1</firstName>
     <lastName>Last 1</lastName>
-    <middleName>Middle 1</middleName>
-    <homePhone>50505</homePhone>
-    <mobilePhone>89111111111</mobilePhone>
-    <workPhone>898989</workPhone>
-    <email>1testgen@tag.com</email>
     <address>address 1</address>
   </contact>
 </list>

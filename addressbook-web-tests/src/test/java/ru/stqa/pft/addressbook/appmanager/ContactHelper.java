@@ -31,11 +31,11 @@ public class ContactHelper extends HelperBase {
     type(By.name("email3"), contactData.email3());
     type(By.name("phone2"), contactData.phone2());
     attach(By.name("photo"), contactData.photo());  //если не закоментить то будет ошибка NullPointerException
-    if (creation) {
-      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.group());
-    } else {
-      Assert.assertFalse(isElementPresent(By.name("new_group")));
-    }
+   // if (creation) {
+   //   new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.group());
+   // } else {
+   //   Assert.assertFalse(isElementPresent(By.name("new_group")));
+   // }
   }
 
   public void addNew() {
@@ -70,12 +70,21 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("//input[22]"));
   }
 
-  public void create(ContactData contactData) {
+  public void create(ContactData contact, boolean creation) {
     addNew();
-    type(By.name("firstname"), contactData.firstName());
-    type(By.name("lastname"), contactData.lastName());
-    type(By.name("middlename"), contactData.middleName());
-    submitContactForm();
+    type(By.name("firstname"), contact.firstName());
+    type(By.name("lastname"), contact.lastName());
+    type(By.name("address"), contact.address());
+
+    if (creation) {
+      if (contact.getGroups().size() > 0) {
+        Assert.assertTrue(contact.getGroups().size() == 1);
+        new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contact.getGroups().iterator().next().name());
+      } else {
+        Assert.assertFalse(isElementPresent(By.name("new_group")));
+      }
+      submitContactForm();
+    }
   }
 
   public void modify(ContactData mContact) {

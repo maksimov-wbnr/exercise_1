@@ -23,7 +23,8 @@ public class ContactPhoneTests extends TestBase {
       if (!app.contact().isThereGroupName("test1")) {
         app.group().create(new GroupData().withName("test1"));
       }
-      app.contact().create(new ContactData()
+      app.contact().addNew();
+      app.contact().fillContactForm(new ContactData()
               .withFirstName("First")
               .withMiddleName("Middle")
               .withLastName("Last")
@@ -33,9 +34,9 @@ public class ContactPhoneTests extends TestBase {
               .withEmail("tag@tag.ru")
               .withEmail2("2@tag.ru")
               .withEmail3("3@tag.ru")
-              .withGroup("test1")
+              //.withGroup("test1")
               .withAddress("Address st. 52")
-              .withPhone2("909090"));
+              .withPhone2("909090"), true);
       app.goTo().homePage();
     }
   }

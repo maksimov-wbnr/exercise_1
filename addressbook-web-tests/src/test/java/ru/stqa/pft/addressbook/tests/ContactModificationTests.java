@@ -24,7 +24,7 @@ public class ContactModificationTests extends TestBase {
               .withMobilePhone("89191111111")
               .withWorkPhone("252525")
               .withEmail("test@tag.com")
-              .withAddress("New address"));
+              .withAddress("New address") , true);
 
       app.goTo().homePage();
     }
@@ -49,9 +49,8 @@ public class ContactModificationTests extends TestBase {
     app.goTo().homePage();
     Contacts after = app.db().contacts();
     assertThat(after.size(),  equalTo(before.size()));
-
-
     assertThat(after, equalTo(before.without(modifiedContact).withAdded(mContact)));
+    verifyContactListInUI();
   }
 
 

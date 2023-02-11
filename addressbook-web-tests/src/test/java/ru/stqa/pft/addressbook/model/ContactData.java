@@ -7,7 +7,9 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @XStreamAlias("contact")
 @Entity
@@ -55,8 +57,9 @@ public  class ContactData {
   @Type(type = "text")
   private  String email3;
 
-  @Transient
-  private  String group;
+  @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable (name = "address_in_groups", joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+  private Set<GroupData> groups = new HashSet<GroupData>();
 
   @Column(name = "address")
   @Type(type = "text")
@@ -131,9 +134,8 @@ public  class ContactData {
     return this;
   }
 
-  public ContactData withGroup(String group) {
-    this.group = group;
-    return this;
+  public Groups getGroups() {
+    return new Groups(groups);
   }
 
   public ContactData withAddress(String address) {
@@ -188,7 +190,6 @@ public  class ContactData {
     return allPhones;
   }
 
-
   public String email() {
     return email;
   }
@@ -199,57 +200,6 @@ public  class ContactData {
 
   public String email3() {
     return email3;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-
-    ContactData that = (ContactData) o;
-
-    if (id != that.id) return false;
-    if (!Objects.equals(firstName, that.firstName)) return false;
-    if (!Objects.equals(lastName, that.lastName)) return false;
-    if (!Objects.equals(middleName, that.middleName)) return false;
-    if (!Objects.equals(homePhone, that.homePhone)) return false;
-    if (!Objects.equals(mobilePhone, that.mobilePhone)) return false;
-    if (!Objects.equals(workPhone, that.workPhone)) return false;
-    if (!Objects.equals(email, that.email)) return false;
-    return Objects.equals(address, that.address);
-  }
-
-  @Override
-  public int hashCode() {
-    int result = id;
-    result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
-    result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
-    result = 31 * result + (middleName != null ? middleName.hashCode() : 0);
-    result = 31 * result + (homePhone != null ? homePhone.hashCode() : 0);
-    result = 31 * result + (mobilePhone != null ? mobilePhone.hashCode() : 0);
-    result = 31 * result + (workPhone != null ? workPhone.hashCode() : 0);
-    result = 31 * result + (email != null ? email.hashCode() : 0);
-    result = 31 * result + (address != null ? address.hashCode() : 0);
-    return result;
-  }
-
-  @Override
-  public String toString() {
-    return "ContactData{" +
-            "id=" + id +
-            ", firstName='" + firstName + '\'' +
-            ", lastName='" + lastName + '\'' +
-            ", middleName='" + middleName + '\'' +
-            ", homePhone='" + homePhone + '\'' +
-            ", mobilePhone='" + mobilePhone + '\'' +
-            ", workPhone='" + workPhone + '\'' +
-            ", email='" + email + '\'' +
-            ", address='" + address + '\'' +
-            '}';
-  }
-
-  public String group() {
-    return group;
   }
 
   public String address() {
@@ -271,6 +221,49 @@ public  class ContactData {
       return null;
     }
   }
+
+  public ContactData inGroup(GroupData group) {
+    groups.add(group);
+    return this;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    ContactData that = (ContactData) o;
+
+    if (id != that.id) return false;
+    if (!Objects.equals(firstName, that.firstName)) return false;
+    if (!Objects.equals(lastName, that.lastName)) return false;
+    return Objects.equals(address, that.address);
+  }
+
+  @Override
+  public int hashCode() {
+    int result = id;
+    result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+    result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+    result = 31 * result + (address != null ? address.hashCode() : 0);
+    return result;
+  }
+
+  @Override
+  public String toString() {
+    return "ContactData{" +
+            "id=" + id +
+            ", firstName='" + firstName + '\'' +
+            ", lastName='" + lastName + '\'' +
+            ", middleName='" + middleName + '\'' +
+            ", homePhone='" + homePhone + '\'' +
+            ", mobilePhone='" + mobilePhone + '\'' +
+            ", workPhone='" + workPhone + '\'' +
+            ", email='" + email + '\'' +
+            ", address='" + address + '\'' +
+            '}';
+  }
+
 
 
 }
