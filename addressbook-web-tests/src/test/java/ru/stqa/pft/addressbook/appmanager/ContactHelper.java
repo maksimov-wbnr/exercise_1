@@ -53,6 +53,12 @@ public class ContactHelper extends HelperBase {
   public void deleteSelectedContacts() {
     click(By.xpath("//input[@value='Delete']"));
   }
+  public void addToGroup(String nameGroup) {
+    new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(nameGroup);
+    click(By.xpath("//input[@name='add']"));
+  }
+
+
 
   public void alertAccept() {
     wd.switchTo().alert().accept();
@@ -145,6 +151,14 @@ public class ContactHelper extends HelperBase {
     return new ContactData().withId(contact.getId())
             .withFirstName(firstname).withLastName(lastname).withAddress(address).withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work)
             .withEmail(email).withEmail2(email2).withEmail3(email3).withPhone2(phone2);
+  }
+
+  public void selectGroupDel(int id) {
+    wd.findElement(By.cssSelector("select[name='group']>option[value='" + id + "']")).click();
+
+  }
+  public void delGroup() {
+    click(By.xpath("//input[@name='remove']"));
   }
 }
 
