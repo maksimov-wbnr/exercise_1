@@ -30,11 +30,12 @@ public class ContactDeletionGroup extends TestBase {
               .inGroup(app.db().groups().iterator().next()), true);
       app.goTo().homePage();
     }
-    ContactData conDelGr = contacts.iterator().next();
-    String groupName = groups.iterator().next().name();
-    if (conDelGr.getGroups().size() == 0){
 
-      app.contact().selectContactById(conDelGr.getId());
+    int conDelGr = app.db().contacts().iterator().next().getId();
+    String groupName = app.db().groups().iterator().next().name();
+    ContactData groupSize = new ContactData();
+    if (groupSize.getGroups().size() == 0){
+      app.contact().selectContactById(conDelGr);
       app.contact().addToGroup(groupName);
     }
 
