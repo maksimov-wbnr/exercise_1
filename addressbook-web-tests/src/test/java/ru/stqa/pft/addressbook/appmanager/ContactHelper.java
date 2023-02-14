@@ -89,8 +89,8 @@ public class ContactHelper extends HelperBase {
       } else {
         Assert.assertFalse(isElementPresent(By.name("new_group")));
       }
-      submitContactForm();
     }
+    submitContactForm();
   }
 
   public void modify(ContactData mContact) {

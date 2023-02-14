@@ -226,6 +226,10 @@ public  class ContactData {
     groups.add(group);
     return this;
   }
+  public ContactData delGroup(GroupData group) {
+    groups.remove(group);
+    return this;
+  }
 
   @Override
   public boolean equals(Object o) {

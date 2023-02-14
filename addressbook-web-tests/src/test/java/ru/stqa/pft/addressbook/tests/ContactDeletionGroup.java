@@ -17,7 +17,7 @@ public class ContactDeletionGroup extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     Contacts contacts = app.db().contacts();
-    Groups groups = app.db().groups();
+    //Groups groups = app.db().groups();
     if (contacts.size() == 0) {
       if (app.db().groups().size() == 0) {
         app.goTo().groupPage();
@@ -47,24 +47,13 @@ public class ContactDeletionGroup extends TestBase {
     Contacts contacts = app.db().contacts();
     ContactData conDelGr = contacts.iterator().next();
     GroupData delGr = conDelGr.getGroups().iterator().next();
-    app.contact().selectGroupDel(delGr.getId());
     app.contact().selectContactById(conDelGr.getId());
+    app.contact().selectGroupDel(delGr.getId());
     app.contact().delGroup();
 
-    ContactData after = conDelGr.inGroup(delGr);
+    ContactData after = conDelGr;
 
-    assertThat(after, equalTo(conDelGr));
+    assertThat(after, equalTo(conDelGr.delGroup(delGr)));
 
-  }
-
-  public ContactData conGroups (Contacts groupsContact){
-    for (ContactData contact : groupsContact) {
-      Set<GroupData> GroupsCon = contact.getGroups();
-      int groupsCon = GroupsCon.size();
-      if (groupsCon > 0) {
-        return contact;
-    }
-    }
-    return null;
   }
 }
