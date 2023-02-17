@@ -222,13 +222,14 @@ public  class ContactData {
     }
   }
 
-  public ContactData inGroup(GroupData group) {
-    groups.add(group);
-    return this;
-  }
-  public ContactData delGroup(GroupData group) {
-    groups.remove(group);
-    return this;
+  @Override
+  public String toString() {
+    return "ContactData{" +
+            "id=" + id +
+            ", firstName='" + firstName + '\'' +
+            ", lastName='" + lastName + '\'' +
+            ", groups=" + groups +
+            '}';
   }
 
   @Override
@@ -241,7 +242,7 @@ public  class ContactData {
     if (id != that.id) return false;
     if (!Objects.equals(firstName, that.firstName)) return false;
     if (!Objects.equals(lastName, that.lastName)) return false;
-    return Objects.equals(address, that.address);
+    return Objects.equals(groups, that.groups);
   }
 
   @Override
@@ -249,25 +250,18 @@ public  class ContactData {
     int result = id;
     result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
     result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
-    result = 31 * result + (address != null ? address.hashCode() : 0);
+    result = 31 * result + (groups != null ? groups.hashCode() : 0);
     return result;
   }
 
-  @Override
-  public String toString() {
-    return "ContactData{" +
-            "id=" + id +
-            ", firstName='" + firstName + '\'' +
-            ", lastName='" + lastName + '\'' +
-            ", middleName='" + middleName + '\'' +
-            ", homePhone='" + homePhone + '\'' +
-            ", mobilePhone='" + mobilePhone + '\'' +
-            ", workPhone='" + workPhone + '\'' +
-            ", email='" + email + '\'' +
-            ", address='" + address + '\'' +
-            '}';
+  public ContactData inGroup(GroupData group) {
+    groups.add(group);
+    return this;
   }
-
+  public ContactData delGroup(GroupData group) {
+    groups.remove(group);
+    return this;
+  }
 
 
 }

@@ -36,14 +36,16 @@ public class ContactAddGroup extends TestBase {
     public void testAddContactToGroup () {
       Contacts contacts = app.db().contacts();
       ContactData contactsAddGroup = contactsGroups(contacts);
-      ContactData before = contactsAddGroup;
       GroupData addGroup = addGroupContact();
+      Contacts before = contacts.without(contactsAddGroup);
 
       app.contact().selectContactById(contactsAddGroup.getId());
       app.contact().addToGroup(addGroup.name());
-      ContactData after = contactsAddGroup;
+      ContactData updateContact = contactsAddGroup.inGroup(addGroup);
+      Contacts after = app.db().contacts();
 
-      assertThat(after, equalTo(before.inGroup(addGroup)));
+
+      assertThat(after, equalTo(before.withAdded(updateContact)));
     }
 
     public ContactData contactsGroups(Contacts groupContact ){
