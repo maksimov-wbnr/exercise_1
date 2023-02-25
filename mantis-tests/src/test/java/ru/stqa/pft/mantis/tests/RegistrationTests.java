@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
 
+
 public class RegistrationTests extends TestBase{
 
   //@BeforeMethod
@@ -27,10 +28,10 @@ public class RegistrationTests extends TestBase{
     String email = String.format("user%s@localhost", now);
     app.james().createUser(user, password);
     app.registration().start(user, email);
-   // List<MailMessage> mailMessages = app.mail().waitForMail(2, 10000);
+
     List<MailMessage> mailMessages = app.james().waitForMail(user,password, 60000 );
     String confirmationLink = findConfirmationLink(mailMessages, email);
-    app.registration().finish(confirmationLink, "password");
+   app.registration().finish(confirmationLink, "password");
     Assert.assertTrue(app.newSession().login(user, password));
   }
 

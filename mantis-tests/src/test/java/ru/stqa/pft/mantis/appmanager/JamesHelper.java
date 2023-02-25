@@ -120,6 +120,9 @@ public class JamesHelper {
 
   private Folder openInbox(String username, String password) throws MessagingException {
     store = mailSession.getStore("pop3");
+    if (mailServer == null){
+      mailServer = app.getProperty("mailserver.host");
+    }
     store.connect(mailServer, username, password);
     Folder folder = store.getDefaultFolder().getFolder("INBOX");
     folder.open(Folder.READ_WRITE);
@@ -131,6 +134,19 @@ public class JamesHelper {
     while (System.currentTimeMillis() < now + timeout) {
       List<MailMessage> allMail = getAllMail(username, password);
       if(allMail.size() > 0){
+        return allMail;
+      } try {
+        Thread.sleep(1000);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+    } throw new Error("No mail :(");
+  }
+  public List<MailMessage> waitForResetMail(String username, String password, long timeout) throws MessagingException {
+    long now = System.currentTimeMillis();
+    while (System.currentTimeMillis() < now + timeout) {
+      List<MailMessage> allMail = getAllMail(username, password);
+      if(allMail.size() > 1){
         return allMail;
       } try {
         Thread.sleep(1000);

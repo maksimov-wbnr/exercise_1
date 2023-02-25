@@ -1,6 +1,7 @@
 package ru.stqa.pft.mantis.appmanager;
 
 
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -21,6 +22,7 @@ public class ApplicationManager {
   private FtpHelper ftp;
   private MailHelper mailHelper;
   private JamesHelper jamesHelper;
+  private ResetPasswordHelper resetPasswordHelper;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -75,6 +77,13 @@ public class ApplicationManager {
     }
     return jamesHelper;
   }
+  public ResetPasswordHelper goTo() {
+    if(resetPasswordHelper == null){
+      resetPasswordHelper =  new ResetPasswordHelper(this);
+    }
+    return resetPasswordHelper;
+  }
+
 
   public WebDriver getDriver() {
     if (wd == null){
@@ -86,6 +95,7 @@ public class ApplicationManager {
         wd = new InternetExplorerDriver();
       }
       wd.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+      wd.manage().window().setSize(new Dimension(1024, 768));
       wd.get(properties.getProperty("web.baseUrl"));
 
     }
