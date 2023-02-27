@@ -17,11 +17,11 @@ public class ResetPasswordHelper extends HelperBase {
     click(By.xpath("//input[@value='Вход']"));
   }
 
-  public void userReset(String user){
-    click(By.xpath("//a[@href='/mantisbt-2.25.4/manage_overview_page.php']"));
+  public void resetOption(){
+    click(By.xpath("//li[6]/a/span"));
     click(By.xpath("//div[2]/div[2]/div/ul/li[2]/a"));
-    click(By.linkText(user));
-    click(By.xpath("//input[@value='Сбросить пароль']"));
+    click(By.xpath("//tr[2]/td/a"));
+
   }
 
   public void resetPassword (String resetLink) {
@@ -34,6 +34,17 @@ public class ResetPasswordHelper extends HelperBase {
     type(By.name("password_confirm"), password);
     click(By.xpath("//button[@type='submit']"));
   }
+
+  public String userReset() {
+    String user = wd.findElement(By.name("username")).getAttribute("value");
+    return user;
+  }
+
+
+  public void reset(){
+    click(By.xpath("//input[@value='Сбросить пароль']"));
+  }
+
 
 
 

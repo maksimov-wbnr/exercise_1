@@ -128,8 +128,25 @@ public class JamesHelper {
     folder.open(Folder.READ_WRITE);
     return folder;
   }
+  public Folder deleteAllmessage(String username, String password) throws MessagingException {
+    store = mailSession.getStore("pop3");
+    if (mailServer == null){
+      mailServer = app.getProperty("mailserver.host");
+    }
+    store.connect(mailServer, username, password);
+    Folder folder = store.getDefaultFolder().getFolder("INBOX");
+    folder.open(Folder.READ_WRITE);
+    Message[] message = folder.getMessages();
+    for (int i = 0; i < message.length; i++) {
+      Message ms = message[i];
+      ms.setFlag(Flags.Flag.DELETED,true);
+    }
+    folder.close(true);
+    return folder;
+  }
 
   public List<MailMessage> waitForMail(String username, String password, long timeout) throws MessagingException {
+
     long now = System.currentTimeMillis();
     while (System.currentTimeMillis() < now + timeout) {
       List<MailMessage> allMail = getAllMail(username, password);
@@ -143,10 +160,11 @@ public class JamesHelper {
     } throw new Error("No mail :(");
   }
   public List<MailMessage> waitForResetMail(String username, String password, long timeout) throws MessagingException {
+
     long now = System.currentTimeMillis();
     while (System.currentTimeMillis() < now + timeout) {
       List<MailMessage> allMail = getAllMail(username, password);
-      if(allMail.size() > 1){
+      if(allMail.size() > 0){
         return allMail;
       } try {
         Thread.sleep(1000);
@@ -162,6 +180,9 @@ public class JamesHelper {
     closeFolder(inbox);
     return messages;
   }
+
+
+
 
   public static MailMessage toModelMail(Message m) {
     try {
