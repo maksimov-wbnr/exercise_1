@@ -37,11 +37,13 @@
         </option>
       </GradleProjectSettings>
       <GradleProjectSettings>
+        <option name="delegatedBuild" value="false" />
+        <option name="testRunner" value="PLATFORM" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/soap-semple" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/soap-sample8" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$/soap-semple" />
+            <option value="$PROJECT_DIR$/soap-sample8" />
           </set>
         </option>
       </GradleProjectSettings>
