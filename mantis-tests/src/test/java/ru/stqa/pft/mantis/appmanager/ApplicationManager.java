@@ -17,12 +17,13 @@ import java.util.concurrent.TimeUnit;
 public class ApplicationManager {
   private final Properties properties;
   private WebDriver wd;
-  private  String browser;
+  private String browser;
   private RegistrationHelper registrationHelper;
   private FtpHelper ftp;
   private MailHelper mailHelper;
   private JamesHelper jamesHelper;
   private ResetPasswordHelper resetPasswordHelper;
+  private SoapHelper soapHelper;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -83,6 +84,15 @@ public class ApplicationManager {
     }
     return resetPasswordHelper;
   }
+
+  public SoapHelper soap() {
+    if(soapHelper == null){
+      soapHelper =  new SoapHelper(this);
+    }
+    return soapHelper;
+  }
+
+
 
 
   public WebDriver getDriver() {
