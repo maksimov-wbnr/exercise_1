@@ -1,13 +1,13 @@
 package ru.stqa.pft.mantis.tests;
 
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 import ru.lanwen.verbalregex.VerbalExpression;
 import ru.stqa.pft.mantis.model.MailMessage;
 
 import javax.mail.MessagingException;
+import javax.xml.rpc.ServiceException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
@@ -15,13 +15,10 @@ import java.util.List;
 
 public class RegistrationTests extends TestBase{
 
-  //@BeforeMethod
-  public void startMailServer(){
-    app.mail().start();
-  }
 
   @Test
-  public void testRegistration() throws IOException, ParseException, MessagingException {
+  public void testRegistration() throws IOException, ParseException, MessagingException, ServiceException {
+    skipIfNotFixed(1);
     long now = System.currentTimeMillis();
     String user = String.format("user%s", +now);
     String password = "password";
@@ -41,9 +38,5 @@ public class RegistrationTests extends TestBase{
     return regex.getText(mailMessage.text);
   }
 
-  //@AfterMethod(alwaysRun = true)
-  public void stopMailServer(){
-    app.mail().stop();
-  }
 
 }
